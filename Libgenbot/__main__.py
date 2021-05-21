@@ -105,7 +105,7 @@ def main():
                                                               'Each page has a maximum of 10 papers (required for --query)')
     parser.add_argument('--dwn-dir', type=str, help='Directory path in which to save the results')
     parser.add_argument('--min-year', default=None, type=int, help='Minimal publication year of the paper to download')
-    parser.add_argument('--max-dwn-year', default=None, type=int, help='Maximum number of papers to download sorted by year')           
+    parser.add_argument('--max-dwn-year', default=None, type=int, help='Maximum number of papers to download sorted by year')
     parser.add_argument('--max-dwn-cites', default=None, type=int, help='Maximum number of papers to download sorted by number of citations')
     parser.add_argument('--journal-filter', default=None, type=str ,help='CSV file path of the journal filter (More info on github)')
     parser.add_argument('--restrict', default=None, type=int ,choices=[0,1], help='0:Download only Bibtex - 1:Down load only papers PDF')
@@ -114,16 +114,16 @@ def main():
     parser.add_argument('--proxy', nargs='*', default=[], help='Use proxychains, provide comma seperated list of proxies to use and please, no spaces' 
                                                                 'Feature currently in alpha and may contain bugs')
     args = parser.parse_args()
-    
+
     pchain = []
     pchain = args.proxy
-    
+
     proxy(pchain)
 
     if args.query==None and args.doi_file==None and args.doi==None and args.scholar_query==None:
         print("Error, provide at least one of the following arguments: --query or --file")
         sys.exit()
-    
+
     if (args.query!=None and args.doi_file!=None) or (args.query!=None and args.doi!=None) or (args.doi!=None and args.doi_file!=None) or (args.scholar_query!=None and args.doi.file!=None) or (args.scholar_query!=None and args.doi!=None) or (args.query!=None and args.scholar_query!=None):
         print("Error: Only one option between '--query', '--scholar-query', '--doi-file' and '--doi' can be used")
         sys.exit()
