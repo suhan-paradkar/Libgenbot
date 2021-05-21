@@ -113,6 +113,14 @@ def main():
     parser.add_argument('--scholar-results', default=10, type=int, choices=[1,2,3,4,5,6,7,8,9,10], help='Downloads the first x results in a scholar page(max=10)') 
     parser.add_argument('--proxy', nargs='*', default=[], help='Use proxychains, provide comma seperated list of proxies to use and please, no spaces' 
                                                                 'Feature currently in alpha and may contain bugs')
+    parser.add_argument('--genre', default=None, type=str, choices=[lg,sa,fi,co,st,mz], help='select genre: one of' 
+                    'libgen(Sci-Tech)[lg]'
+                    'Scientific articles[sa]'
+                    'Fiction[fi]'
+                    'Comics[co]'
+                    'Standards[st]'
+                    'Magazines[mz]')
+
     args = parser.parse_args()
 
     pchain = []
@@ -122,6 +130,10 @@ def main():
 
     if args.query==None and args.doi_file==None and args.doi==None and args.scholar_query==None:
         print("Error, provide at least one of the following arguments: --query or --file")
+        sys.exit()
+
+    if args.genre=None:
+        print("Error, no genre selected")
         sys.exit()
 
     if (args.query!=None and args.doi_file!=None) or (args.query!=None and args.doi!=None) or (args.doi!=None and args.doi_file!=None) or (args.scholar_query!=None and args.doi.file!=None) or (args.scholar_query!=None and args.doi!=None) or (args.query!=None and args.scholar_query!=None):
