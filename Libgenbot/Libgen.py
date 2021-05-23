@@ -5,7 +5,7 @@ from .HTMLparsers import LibgenParser
 from .Crossref import getPapersInfo
 from .NetInfo import NetInfo
 
-def libgen_requests(libgen_pages, url, restrict, libgen_results=10): 
+def libgen_requests(libgen_pages, url, restrict, libgen_results=25): 
     javascript_error = "Sorry, we can't verify that you're not a robot when JavaScript is turned off"
     
     to_download = []
@@ -26,7 +26,7 @@ def libgen_requests(libgen_pages, url, restrict, libgen_results=10):
                 break
 
         lpapers = libgenParser(html)
-        print("\nLibgen page {} : {} papers found".format(i,scholar_results))
+        print("\nLibgen page {} : {} papers found".format(i,libgen_results))
 
         if(len(lpapers)>0):
             papersInfo = getPapersInfo(lpapers, url, restrict, libgen_results)
@@ -44,10 +44,8 @@ def libgen_requests(libgen_pages, url, restrict, libgen_results=10):
 
 def LibgenPapersInfo(lquery, libgen_pages, restrict, min_date=None, libgen_results=10):
 
-    url = r"https://libgen.is/scimag/?q="+lquery+"&as_vis=1&as_sdt=1,5&start=%d"
+    url = r"https://libgen.is/search.php?req="+lquery+"lg_topic=libgen&open=0&view=simple&res="+libgen_results+"&phrase=1&column=def"
     
-    if min_date!=None:
-        url += "&as_ylo="+str(min_date)
 
     if len(lquery)>7 and (query[0:7]=="http://" or query[0:8]=="https://"):
          url = query
