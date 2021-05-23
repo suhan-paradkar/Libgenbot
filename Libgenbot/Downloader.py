@@ -94,3 +94,26 @@ def downloadPapers(papers, dwnl_dir, num_limit, scholar_results, SciHub_URL=None
                     pass
 
                 faild += 1
+
+
+ def setLibgenUrl():
+    r = requests.get(NetInfo.Libgen_URLs_repo, headers=NetInfo.HEADERS)
+    links = LibgenUrls(r.text)
+    found = False
+
+    for l in links:
+        try:
+            r = requests.get(l, headers=NetInfo.HEADERS)
+            if r.status_code == 200:
+                found = True
+                NetInfo.Libgen_URL = l
+                break
+        except:
+            pass
+        if found:
+            print("\nUsing {} as Libgen instance".format(NetInfo.Libgen_URL))
+        else:
+            print("\nNo working Libgen instance found!\nIf in your country Libgen is not available consider using a VPN or a proxy")
+            NetInfo.Libgen_URL = "https://libgen.is/"
+
+

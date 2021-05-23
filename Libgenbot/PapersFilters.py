@@ -1,22 +1,10 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Aug 18 12:41:29 2020
-
-@author: Vito
-"""
 import pandas as pd
 from difflib import SequenceMatcher
 
 def similarStrings(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
-"""
-Input
-    papers: list of Paper
-    csv_path: path of a csv containing the journals to include (consult the GitHub page for the csv format)
-Output
-    result: list of Paper published by the journals included in the csv
-"""
 def filterJurnals(papers,csv_path):
     result = []
     df = pd.read_csv(csv_path, sep=";")
@@ -36,13 +24,6 @@ def filterJurnals(papers,csv_path):
     return result
 
 
-"""
-Input
-    papers: list of Paper
-    min_year: minimal publication year accepted
-Output
-    result: list of Paper published since min_year
-"""
 def filter_min_date(list_papers,min_year):
     new_list = []
 
@@ -51,3 +32,4 @@ def filter_min_date(list_papers,min_year):
              new_list.append(paper)
 
     return new_list
+

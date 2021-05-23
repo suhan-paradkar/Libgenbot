@@ -99,3 +99,8 @@ def SciHubUrls(html):
 
     return result
 
+def Libgenparser(html):
+    result = []
+    soup = BeautifulSoup(html, "html.parser")
+
+
