@@ -132,7 +132,7 @@ def main():
         print("Error, provide at least one of the following arguments: --query or --file")
         sys.exit()
 
-    if args.genre=None:
+    if args.genre==None:
         print("Error, no genre selected")
         sys.exit()
 
