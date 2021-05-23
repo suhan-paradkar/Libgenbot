@@ -99,8 +99,37 @@ def SciHubUrls(html):
 
     return result
 
-def Libgenparser(html):
+def LibgenParser(html):
     result = []
     soup = BeautifulSoup(html, "html.parser")
+    for element in soup.findAll("table", class_="c"):
+        for tbody in table.findAll("tbody", bgcolor_!="#C0C0C0"):
+            for tr in element.findAll("tr", width_="500"):
+                for a in tr.findAll("a"):
+                    if found == False:
+                        title = a.text
+            link = None
+            authors = None
 
+            for td in element.findAll("td", width_!="500"):
+                found = False
+                    
+                    for a in td.findAll("a"):
+                        if found == False:
+                            
+                            if (a.text != ("[1]")) or (a.text != ("[2]")) or (a.text != ("[3]")) or (a.text != ("[4]")) or (a.text != ("[5]")):
+                                
+                                if a.text != "[edit]":
+                                    authors = a.text
+                            else:
+                                if a.text == "[1]":
+                                    link = a.get("href")
+                                    found = True
+
+            if title!=None:
+                result.append({
+                    'title' : title,
+                    'link' : link,
+                    'authors' : authors})
+    return result
 
