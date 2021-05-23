@@ -59,11 +59,3 @@ git clone https://github.com/suhan-paradkar/Libgenbot.git
 pip install -r requirements.txt
 python setup.py install
 ```
-
-## Support
-
-Any issues, can be discussed in official discord server
-
-https://discord.gg/a95Axs8VWg
-
-If you find any bugs.. create an issue in github
