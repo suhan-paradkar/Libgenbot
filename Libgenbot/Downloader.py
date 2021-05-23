@@ -96,7 +96,7 @@ def downloadPapers(papers, dwnl_dir, num_limit, scholar_results, SciHub_URL=None
                 faild += 1
 
 
- def setLibgenUrl():
+def setLibgenUrl():
     r = requests.get(NetInfo.Libgen_URLs_repo, headers=NetInfo.HEADERS)
     links = LibgenUrls(r.text)
     found = False
