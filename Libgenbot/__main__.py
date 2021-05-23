@@ -92,27 +92,46 @@ def start(query, results, pages, dwn_dir, proxy, min_date=None, num_limit=None, 
 
 def main():
     print("""Libgenbot is a simple bot written in python inspired by PyPaperBot""")
+
     parser = argparse.ArgumentParser(description='Libgenbot is python tool to search and download any book using Libgen')
+    
     parser.add_argument('--query', '-q', type=str, default=None, help='Query to make on Libgen')
+    
     parser.add_argument('--scholar-query', 'sq', type=str, default=None, help='query to be made on Google Scholar')
+    
     parser.add_argument('--doi', type=str, default=None, help='DOI of the paper to download (this option uses only Libgen to download)')
+    
     parser.add_argument('--doi-file', type=str, default=None, help='File .txt containing the list of paper\'s DOIs to download')
+    
     parser.add_argument('--scholar-pages', '-sp', type=str, help='If given in %%d format, the number of pages to download from the beginning. '
                                                                'If given in %%d-%%d format, the range of pages (starting from 1) to download (the end is included). '
                                                                'Each page has a maximum of 10 papers (required for --scholar-query')
+    
     parser.add_argument('--libgen-pages', '-p', type=str, help='If given in %%d format, the number of pages to download'
                                                               'If given in %%d-%%d format, the range of pages (starting from 1) to download'
-                                                              'Each page has a maximum of 10 papers (required for --query)')
+                                                              'Each page has a maximum of 100 papers (required for --query)')
+    
     parser.add_argument('--dwn-dir', type=str, help='Directory path in which to save the results')
+    
     parser.add_argument('--min-year', default=None, type=int, help='Minimal publication year of the paper to download')
+    
     parser.add_argument('--max-dwn-year', default=None, type=int, help='Maximum number of papers to download sorted by year')
+    
     parser.add_argument('--max-dwn-cites', default=None, type=int, help='Maximum number of papers to download sorted by number of citations')
+    
     parser.add_argument('--journal-filter', default=None, type=str ,help='CSV file path of the journal filter (More info on github)')
+    
     parser.add_argument('--restrict', default=None, type=int ,choices=[0,1], help='0:Download only Bibtex - 1:Down load only papers PDF')
+    
     parser.add_argument('--scihub-mirror', default=None, type=str, help='Mirror for downloading papers from sci-hub. If not set, it is selected automatically')
-    parser.add_argument('--scholar-results', default=10, type=int, choices=[1,2,3,4,5,6,7,8,9,10], help='Downloads the first x results in a scholar page(max=10)') 
+    
+    parser.add_argument('--scholar-results', default=10, type=int, choices=[1,2,3,4,5,6,7,8,9,10], help='Downloads the first x results in a scholar page(max=10)')
+    
+    parser.add_argument('--libgen-results', default=10, type=int, choices=[1-100], help='Downloads the first x result of a Libgen page(max=100)')
+    
     parser.add_argument('--proxy', nargs='*', default=[], help='Use proxychains, provide comma seperated list of proxies to use and please, no spaces' 
                                                                 'Feature currently in alpha and may contain bugs')
+    
     parser.add_argument('--genre', default=None, type=str, choices=[lg,sa,fi,co,st,mz], help='select genre: one of' 
                     'libgen(Sci-Tech)[lg]'
                     'Scientific articles[sa]'

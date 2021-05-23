@@ -44,7 +44,14 @@ def libgen_requests(libgen_pages, url, restrict, libgen_results=25):
 
 def LibgenPapersInfo(lquery, libgen_pages, restrict, min_date=None, libgen_results=10):
 
-    url = r"https://libgen.is/search.php?req="+lquery+"lg_topic=libgen&open=0&view=simple&res="+libgen_results+"&phrase=1&column=def"
+    libgen_results_arg = 25
+
+    if libgen_results > 25:
+            libgen_results_arg += 25
+            if libgen_results > 50:
+                libgen_results_arg += 50
+
+    url = r"https://libgen.is/search.php?req="+lquery+"lg_topic=libgen&open=0&view=simple&res="+libgen_results_arg+"&phrase=1&column=def"
     
 
     if len(lquery)>7 and (query[0:7]=="http://" or query[0:8]=="https://"):
