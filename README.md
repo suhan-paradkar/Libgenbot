@@ -21,7 +21,7 @@ pip3 install -r requirements.txt
 python3 setup.py install
 ```
 
-##Installation in termux
+## Installation in termux
 
 First, you need to be subscribed into its-pointless repo
 
