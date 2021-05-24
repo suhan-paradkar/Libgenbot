@@ -9,7 +9,7 @@ from .Scholar import ScholarPapersInfo
 from .Crossref import getPapersInfoFromDOIs
 from .proxy import proxy
 
-def scholar_start(scholar_query, scholar_results, scholar_pages, dwn_dir, proxy, min_date=None, num_limit=None, num_limit_type=None, filter_jurnal_file=None, restrict=None, DOIs=None, SciHub_URL=None):
+def scholar_start(query, scholar_query, scholar_results, scholar_pages, dwn_dir, proxy, min_date=None, num_limit=None, num_limit_type=None, filter_jurnal_file=None, restrict=None, DOIs=None, SciHub_URL=None):
 
     to_download = []
     if DOIs==None:
@@ -49,7 +49,7 @@ def scholar_start(scholar_query, scholar_results, scholar_pages, dwn_dir, proxy,
     Paper.generateBibtex(to_download,dwn_dir+"bibtex.bib")
 
 
-def start(query, results, pages, dwn_dir, proxy, min_date=None, num_limit=None, num_limit_type=None, filter_jurnal_file=None, restrict=None, DOIs=None, Libgen_URL=None):
+def start(query, results, pages, genre, dwn_dir, proxy, num_limit=None, num_limit_type=None, filter_jurnal_file=None, restrict=None, DOIs=None, Libgen_URL=None):
 
     to_download = []
     if DOIs==None:
@@ -72,9 +72,6 @@ def start(query, results, pages, dwn_dir, proxy, min_date=None, num_limit=None, 
     if restrict!=0 and to_download:
         if filter_jurnal_file!=None:
            to_download = filterJurnals(to_download,filter_jurnal_file)
-
-        if min_date!=None:
-            to_download = filter_min_date(to_download,min_date)
 
         if num_limit_type!=None and num_limit_type==0:
             to_download.sort(key=lambda x: int(x.sc_year) if x.sc_year!=None else 0, reverse=True)
@@ -147,11 +144,7 @@ def main():
 
     proxy(pchain)
 
-    if args.query==None and args.doi_file==None and args.doi==None and args.scholar_query==None:
-        print("Error, provide at least one of the following arguments: --query or --file")
-        sys.exit()
-
-    if args.genre==None:
+    if args.query!=None and args.genre==None:
         print("Error, no genre selected")
         sys.exit()
 
@@ -174,7 +167,28 @@ def main():
         print("Error: Only one option between '--max-dwn-year' and '--max-dwn-cites' can be used ")
         sys.exit()
 
-    if(args.query != None):
+     if(args.query != None):
+        if args.libgen_pages:
+            try:
+                split = args.libgen_pages.split('-')
+                if len(split) == 1:
+                    libgen_pages = range(1, int(split[0]) + 1)
+                elif len(split) == 2:
+                    start_page, end_page = [int(x) for x in split]
+                    libgen_pages = range(start_page, end_page + 1)
+                else:
+                    raise ValueError
+            except Exception:
+                print(r"Error: Invalid format for --libgen-pages option. Expected: %d or %d-%d, got: " + args.libgen_pages)
+                sys.exit()
+        else:
+            print("Error: with --libgen-query provide also --libgen-pages")
+            sys.exit()
+    else:
+        libgen_pages = 0
+
+
+    if(args.scholar_query != None):
         if args.scholar_pages:
             try:
                 split = args.scholar_pages.split('-')
@@ -189,14 +203,14 @@ def main():
                 print(r"Error: Invalid format for --scholar-pages option. Expected: %d or %d-%d, got: " + args.scholar_pages)
                 sys.exit()
         else:
-            print("Error: with --query provide also --scholar-pages")
+            print("Error: with --scholar-query provide also --scholar-pages")
             sys.exit()
     else:
         scholar_pages = 0
 
 
     DOIs = None
-    if args.doi_file!=None:
+    if args.doi_file != None:
         DOIs = []
         f = args.doi_file.replace('\\', '/')
         with open(f) as file_in:
@@ -218,8 +232,12 @@ def main():
         max_dwn = args.max_dwn_cites
         max_dwn_type = 1
 
+    if libgen_pages != None:
+        start(args.query, args.libgen_results, args.libgen_pages, args.genre, dwn_dir, proxy, max_dwn, max_dwn_type , args.journal_filter, args.restrict, DOIs, args.libgen_mirror)
 
-    start(args.query, args.scholar_results, scholar_pages, dwn_dir, proxy, args.min_year , max_dwn, max_dwn_type , args.journal_filter, args.restrict, DOIs, args.libgen_mirror)
+    if scholar_pages != None:
+         scholar_start(args.query, args.scholar_results, args.scholar_pages, dwn_dir, proxy, args.min_year , max_dwn, max_dwn_type , args.journal_filter, args.restrict, DOIs, args.libgen_mirror)
+
 
 if __name__ == "__main__":
     main()
