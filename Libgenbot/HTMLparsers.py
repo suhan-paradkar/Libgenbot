@@ -133,6 +133,13 @@ def LibgenParser(html, genre):
                         'link' : link,
                         'authors' : authors})
         return result
+    
+    if genre = sc:
+        soup = BeautifulSoup(html, "html.parser")
+        for element in soup.findAll("table", class_="catalog"):
+            for tbody in table.findAll("tbody"):
+                for tr in tbody.findAll("tr"):
+                    for td in tr.findAll("td"):
 
 def SciHubUrls(html):
     result = []
