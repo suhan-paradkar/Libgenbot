@@ -5,7 +5,7 @@ from .HTMLparsers import LibgenParser
 from .Crossref import getPapersInfo
 from .NetInfo import NetInfo
 
-def libgen_requests(libgen_pages, url, restrict, libgen_results=25): 
+def libgen_requests(libgen_pages, genre, url, restrict, libgen_results=25): 
     javascript_error = "Sorry, we can't verify that you're not a robot when JavaScript is turned off"
     
     to_download = []
@@ -25,7 +25,7 @@ def libgen_requests(libgen_pages, url, restrict, libgen_results=25):
             else:
                 break
 
-        lpapers = libgenParser(html)
+        lpapers = libgenParser(html, genre)
         print("\nLibgen page {} : {} papers found".format(i,libgen_results))
 
         if(len(lpapers)>0):
@@ -42,7 +42,7 @@ def libgen_requests(libgen_pages, url, restrict, libgen_results=25):
 
     return to_download
 
-def LibgenPapersInfo(lquery, libgen_pages, restrict, min_date=None, libgen_results=10):
+def LibgenPapersInfo(lquery, libgen_pages, genre, restrict, min_date=None, libgen_results=10):
 
     libgen_results_arg = 25
 
@@ -57,6 +57,6 @@ def LibgenPapersInfo(lquery, libgen_pages, restrict, min_date=None, libgen_resul
     if len(lquery)>7 and (query[0:7]=="http://" or query[0:8]=="https://"):
          url = query
 
-    to_download = libgen_requests(libgen_pages, url, restrict, libgen_results)
+    to_download = libgen_requests(libgen_pages, genre, url, restrict, libgen_results)
 
     return [item for sublist in to_download for item in sublist]
