@@ -127,19 +127,41 @@ def LibgenParser(html, genre):
                                         link = a.get("href")
                                         found = True
                                         
-                if title!=None:
-                    result.append({
-                        'title' : title,
-                        'link' : link,
-                        'authors' : authors})
+            if title!=None:
+                result.append({
+                    'title' : title,
+                    'link' : link,
+                    'authors' : authors})
         return result
     
-    if genre = sc:
+    if genre = sa:
         soup = BeautifulSoup(html, "html.parser")
         for element in soup.findAll("table", class_="catalog"):
             for tbody in table.findAll("tbody"):
                 for tr in tbody.findAll("tr"):
                     for td in tr.findAll("td"):
+                        for ul in td.findAll("ul", class_="record_mirrors"):
+                            for a in ul.findAll("a"):
+                                link = a.get("href")
+                        for p in td.findAll("p"):
+                            for a in p.findAll("a"):
+                                possible = a.get("href")
+                                if possible.startswith("scimag/journals"):
+                                    jurnal = a.text
+                                else:
+                                    title = a.text
+                        if br in td.findAll("br"):
+                            authors = None
+                        else:
+                            authors = td.text
+
+                    if title!=None:
+                        result.append({
+                            'title' : title,
+                            'link' : link,
+                            'authors' : authors})
+        return result
+
 
 def SciHubUrls(html):
     result = []
