@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Jun  7 11:59:42 2020
 
-@author: Vito
-"""
 from bs4 import BeautifulSoup
 
 def schoolarParser(html):
@@ -36,7 +32,7 @@ def schoolarParser(html):
                     continue
 
                 if not authors.strip().endswith('\u2026'):
-                    # There is no ellipsis at the end so we know the full list of authors
+
                     authors = authors.replace(', ', ';')
                 else:
                     authors = None
@@ -99,6 +95,18 @@ def SciHubUrls(html):
 
     return result
 
+def LibgenUrls(html):
+    result = []
+    soup = BeautifulSoup(html, "html.parser")
+
+    for ul in soup.findAll("ul"):
+        for a in ul.findAll("a"):
+            link = a.get("href")
+            if link.startswith("https://libgen.") or link.startswith("http://libgen."):
+                result.append(link)
+
+    return result
+
 def LibgenParser(html, genre):
     result = []
     if genre == 2:
@@ -111,29 +119,28 @@ def LibgenParser(html, genre):
                             title = a.text
                 link = None
                 authors = None
-                
+
                 for td in element.findAll("td", width_!="500"):
                     found = False
-                    
+
                     for a in td.findAll("a"):
                         if found == False:
-                        
+
                             if (a.text != ("[1]")) or (a.text != ("[2]")) or (a.text != ("[3]")) or (a.text != ("[4]")) or (a.text != ("[5]")):
-                            
                                 if a.text != "[edit]":
                                      authors = a.text
                                 else:
                                     if a.text == "[1]":
                                         link = a.get("href")
                                         found = True
-                                        
+
             if title!=None:
                 result.append({
                     'title' : title,
                     'link' : link,
                     'authors' : authors})
         return result
-    
+
     if genre == 2:
         soup = BeautifulSoup(html, "html.parser")
         for element in soup.findAll("table", class_="catalog"):
@@ -150,7 +157,7 @@ def LibgenParser(html, genre):
                                     jurnal = a.text
                                 else:
                                     title = a.text
-                        
+
                         if br in td.findAll("br"):
                             authors = None
                         else:
@@ -172,16 +179,16 @@ def LibgenParser(html, genre):
                             for li in ul.findall("li"):
                                 for a in li.findAll("a"):
                                     authors = a.text
-                        
+
                         for a in td.findAll("a"):
                             fic = a.get("href")
                             if fic.startswith("fiction/"):
                                 title = a.text
-                        
+
                         for ul in tr.findAll("ul", class_="record_mirrors_compact"):
                             for li in ul.findAll("li"):
                                 for a in li.findAll("a"):
-                                    if a.text = "[1]":
+                                    if a.text == "[1]":
                                         link = a.get("href")
 
 
@@ -203,4 +210,5 @@ def SciHubUrls(html):
                 result.append(link)
 
     return result
+
 
