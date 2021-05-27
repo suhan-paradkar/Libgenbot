@@ -101,7 +101,7 @@ def SciHubUrls(html):
 
 def LibgenParser(html, genre):
     result = []
-    if genre == lg:
+    if genre == 2:
         soup = BeautifulSoup(html, "html.parser")
         for element in soup.findAll("table", class_="c"):
             for tbody in table.findAll("tbody", bgcolor_!="#C0C0C0"):
@@ -134,7 +134,7 @@ def LibgenParser(html, genre):
                     'authors' : authors})
         return result
     
-    if genre = sa:
+    if genre == 2:
         soup = BeautifulSoup(html, "html.parser")
         for element in soup.findAll("table", class_="catalog"):
             for tbody in table.findAll("tbody"):

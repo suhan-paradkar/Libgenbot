@@ -129,13 +129,13 @@ def main():
     parser.add_argument('--proxy', nargs='*', default=[], help='Use proxychains, provide comma seperated list of proxies to use and please, no spaces' 
                                                                 'Feature currently in alpha and may contain bugs')
     
-    parser.add_argument('--genre', default=None, type=str, choices=[lg,sa,fi,co,st,mz], help='select genre: one of' 
-                    'libgen(Sci-Tech)[lg]'
-                    'Scientific articles[sa]'
-                    'Fiction[fi]'
-                    'Comics[co]'
-                    'Standards[st]'
-                    'Magazines[mz]')
+    parser.add_argument('--genre', default=None, type=int, choices=[1,2,3,4,5,6], help='select genre: one of' 
+                    'libgen(Sci-Tech)[1]'
+                    'Scientific articles[2]'
+                    'Fiction[3]'
+                    'Comics[4]'
+                    'Standards[5]'
+                    'Magazines[6]')
 
     args = parser.parse_args()
 
