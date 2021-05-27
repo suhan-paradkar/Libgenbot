@@ -132,10 +132,7 @@ def main():
     parser.add_argument('--genre', default=None, type=int, choices=[1,2,3,4,5,6], help='select genre: one of' 
                     'libgen(Sci-Tech)[1]'
                     'Scientific articles[2]'
-                    'Fiction[3]'
-                    'Comics[4]'
-                    'Standards[5]'
-                    'Magazines[6]')
+                    'Fiction[3]')
 
     args = parser.parse_args()
 
