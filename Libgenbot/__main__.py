@@ -94,7 +94,7 @@ def main():
     
     parser.add_argument('--query', '-q', type=str, default=None, help='Query to make on Libgen')
     
-    parser.add_argument('--scholar-query', 'sq', type=str, default=None, help='query to be made on Google Scholar')
+    parser.add_argument('--scholar-query', '-sq', type=str, default=None, help='query to be made on Google Scholar')
     
     parser.add_argument('--doi', type=str, default=None, help='DOI of the paper to download (this option uses only Libgen to download)')
     
