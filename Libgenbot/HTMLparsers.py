@@ -113,29 +113,26 @@ def LibgenParser(html, genre):
         soup = BeautifulSoup(html, "html5lib")
         for element in soup.findAll("table", class_="c"):
             k = True
-            for tbody in element.findAll("tbody", attrs = {'bgcolor':'#C0C0C0'}):
-                k = False
-                if k = True:
-                    for tr in element.findAll("tr", attrs = {'width':'500'}):
-                        for a in tr.findAll("a"):
-                            if found == False:
-                                title = a.text
-                    link = None
-                    authors = None
+            for tbody in element.findAll("tbody", bgcolor!="#C0C0C0"):
+                for tr in element.findAll("tr", width!=500):
+                    for a in tr.findAll("a"):
+                        if found == False:
+                            title = a.text
+                link = None
+                authors = None
 
-                    for td in element.findAll("td", attrs = {'width':'500'}):
-                        found = False
+                for td in element.findAll("td", width=!"500"):
+                    found = False
+                    for a in td.findAll("a"):
+                        if found == False:
 
-                        for a in td.findAll("a"):
-                            if found == False:
-
-                                if (a.text != ("[1]")) or (a.text != ("[2]")) or (a.text != ("[3]")) or (a.text != ("[4]")) or (a.text != ("[5]")):
-                                    if a.text != "[edit]":
-                                        authors = a.text
-                                    else:
-                                        if a.text == "[1]":
-                                            link = a.get("href")
-                                            found = True
+                            if (a.text != ("[1]")) or (a.text != ("[2]")) or (a.text != ("[3]")) or (a.text != ("[4]")) or (a.text != ("[5]")):
+                                if a.text != "[edit]":
+                                    authors = a.text
+                                else:
+                                    if a.text == "[1]":
+                                        link = a.get("href")
+                                        found = True
 
             if title!=None:
                 result.append({
