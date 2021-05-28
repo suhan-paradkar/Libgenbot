@@ -112,15 +112,15 @@ def LibgenParser(html, genre):
     if genre == 1:
         soup = BeautifulSoup(html, "html.parser")
         for element in soup.findAll("table", class_="c"):
-            for tbody in element.findAll("tbody", bgcolor_!="#C0C0C0"):
-                for tr in element.findAll("tr", width_="500"):
+            for tbody in element.findAll("tbody", attrs != {'bgcolor':'#C0C0C0'}):
+                for tr in element.findAll("tr", attrs = {'width':'500'}):
                     for a in tr.findAll("a"):
                         if found == False:
                             title = a.text
                 link = None
                 authors = None
 
-                for td in element.findAll("td", width_!="500"):
+                for td in element.findAll("td", attrs = {'width':'500'}):
                     found = False
 
                     for a in td.findAll("a"):
