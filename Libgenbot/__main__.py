@@ -124,7 +124,7 @@ def main():
     
     parser.add_argument('--scholar-results', default=10, type=int, choices=[1,2,3,4,5,6,7,8,9,10], help='Downloads the first x results in a scholar page(max=10)')
     
-    parser.add_argument('--libgen-results', default=10, type=int, choices=[1-100], help='Downloads the first x result of a Libgen page(max=100)')
+    parser.add_argument('--libgen-results', default=10, type=int, help='Downloads the first x result of a Libgen page(max=100)')
     
     parser.add_argument('--proxy', nargs='*', default=[], help='Use proxychains, provide comma seperated list of proxies to use and please, no spaces' 
                                                                 'Feature currently in alpha and may contain bugs')
@@ -151,6 +151,10 @@ def main():
 
     if args.dwn_dir==None:
         print("Error, provide the directory path in which to save the results")
+        sys.exit()
+
+    if (args.libgen_results >= 100) or (args.libgen_results =< 0):
+        print("Error: value of --libgen-results must be between 0 to 100")
         sys.exit()
 
     if args.scholar_results!=10 and args.scholar_pages!=1:
