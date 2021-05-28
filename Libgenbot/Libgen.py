@@ -25,7 +25,7 @@ def libgen_requests(libgen_pages, genre, url, restrict, libgen_results=25):
             else:
                 break
 
-        lpapers = libgenParser(html, genre)
+        lpapers = LibgenParser(html, genre)
         print("\nLibgen page {} : {} papers found".format(i,libgen_results))
 
         if(len(lpapers)>0):
