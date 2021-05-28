@@ -112,7 +112,7 @@ def LibgenParser(html, genre):
     if genre == 1:
         soup = BeautifulSoup(html, "html.parser")
         for element in soup.findAll("table", class_="c"):
-            for tbody in table.findAll("tbody", bgcolor_!="#C0C0C0"):
+            for tbody in element.findAll("tbody", bgcolor_!="#C0C0C0"):
                 for tr in element.findAll("tr", width_="500"):
                     for a in tr.findAll("a"):
                         if found == False:
@@ -144,7 +144,7 @@ def LibgenParser(html, genre):
     if genre == 2:
         soup = BeautifulSoup(html, "html.parser")
         for element in soup.findAll("table", class_="catalog"):
-            for tbody in table.findAll("tbody"):
+            for tbody in element.findAll("tbody"):
                 for tr in tbody.findAll("tr"):
                     for td in tr.findAll("td"):
                         for ul in td.findAll("ul", class_="record_mirrors"):
@@ -172,7 +172,7 @@ def LibgenParser(html, genre):
     if genre == 3:
         soup = BeautifulSoup(html, "html.parser")
         for element in soup.findall("table", class_="catalog"):
-            for tbody in table.findAll("tbody"):
+            for tbody in element.findAll("tbody"):
                 for tr in tbody.findAll("tr"):
                     for td in tr.findAll("td"):
                         for ul in tr.findAll("ul", class_="catalog_authors"):
