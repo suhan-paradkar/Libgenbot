@@ -110,7 +110,7 @@ def LibgenUrls(html):
 def LibgenParser(html, genre):
     result = []
     if genre == 1:
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(html, "html5lib")
         for element in soup.findAll("table", class_="c"):
             for tbody in element.findAll("tbody", attrs != {'bgcolor':'#C0C0C0'}):
                 for tr in element.findAll("tr", attrs = {'width':'500'}):
