@@ -12,9 +12,8 @@ def libgen_requests(libgen_pages, genre, url, restrict, libgen_results=25):
     
     for i in libgen_pages:
         while True:
-            k = int(i)
-            res_url = str(url) % str(libgen_results * (k - 1))
-            html = requests.get(res_url, headers=NetInfo.HEADERS)
+            url += "&page="+str(i)
+            html = requests.get(url, headers=NetInfo.HEADERS)
             html = html.text
 
             if javascript_error in html:    
