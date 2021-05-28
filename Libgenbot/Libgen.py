@@ -51,7 +51,7 @@ def LibgenPapersInfo(lquery, libgen_pages, genre, restrict, libgen_results=10):
             if libgen_results > 50:
                 libgen_results_arg += 50
 
-    url = r"https://libgen.is/search.php?req="+lquery+"lg_topic=libgen&open=0&view=simple&res="+libgen_results_arg+"&phrase=1&column=def"
+    url = r"https://libgen.is/search.php?req="+lquery+"lg_topic=libgen&open=0&view=simple&res="+str(libgen_results_arg)+"&phrase=1&column=def"
     
 
     if len(lquery)>7 and (query[0:7]=="http://" or query[0:8]=="https://"):
