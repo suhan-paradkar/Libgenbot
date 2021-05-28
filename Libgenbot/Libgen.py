@@ -42,7 +42,7 @@ def libgen_requests(libgen_pages, genre, url, restrict, libgen_results=25):
 
     return to_download
 
-def LibgenPapersInfo(lquery, libgen_pages, genre, restrict, min_date=None, libgen_results=10):
+def LibgenPapersInfo(lquery, libgen_pages, genre, restrict, libgen_results=10):
 
     libgen_results_arg = 25
 

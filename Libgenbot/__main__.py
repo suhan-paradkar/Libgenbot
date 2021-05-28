@@ -54,7 +54,7 @@ def start(query, results, pages, genre, dwn_dir, proxy, num_limit=None, num_limi
     to_download = []
     if DOIs==None:
         print("Query: {}".format(query))
-        to_download = LibgenPapersInfo(query, pages, genre, restrict, min_date, results)
+        to_download = LibgenPapersInfo(query, pages, genre, restrict, results)
     else:
         print("Downloading papers from DOIs\n")
         num = 1
