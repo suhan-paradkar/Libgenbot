@@ -13,7 +13,7 @@ def libgen_requests(libgen_pages, genre, url, restrict, libgen_results=25):
     for i in libgen_pages:
         while True:
             k = int(i)
-            res_url = url % (libgen_result * (k - 1))
+            res_url = url % (libgen_results * (k - 1))
             html = requests.get(res_url, headers=NetInfo.HEADERS)
             html = html.text
 
