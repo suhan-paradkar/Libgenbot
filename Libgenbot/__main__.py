@@ -164,7 +164,7 @@ def main():
         print("Error: Only one option between '--max-dwn-year' and '--max-dwn-cites' can be used ")
         sys.exit()
 
-     if(args.query != None):
+    if(args.query != None):
         if args.libgen_pages:
             try:
                 split = args.libgen_pages.split('-')
