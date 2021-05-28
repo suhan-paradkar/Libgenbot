@@ -54,7 +54,7 @@ def LibgenPapersInfo(lquery, libgen_pages, genre, restrict, libgen_results=10):
     url = r"https://libgen.is/search.php?req="+lquery+"lg_topic=libgen&open=0&view=simple&res="+str(libgen_results_arg)+"&phrase=1&column=def"
     
 
-    if len(lquery)>7 and (query[0:7]=="http://" or query[0:8]=="https://"):
+    if len(lquery)>7 and (lquery[0:7]=="http://" or lquery[0:8]=="https://"):
          url = query
 
     to_download = libgen_requests(libgen_pages, genre, url, restrict, libgen_results)
