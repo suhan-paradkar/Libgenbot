@@ -121,7 +121,9 @@ def main():
     parser.add_argument('--restrict', default=None, type=int ,choices=[0,1], help='0:Download only Bibtex - 1:Down load only papers PDF')
     
     parser.add_argument('--scihub-mirror', default=None, type=str, help='Mirror for downloading papers from sci-hub. If not set, it is selected automatically')
-    
+
+    parser.add_argument('--libgen-mirror', default=None, type=str, help='Mirror for downloading papers from Libgen. If not set, it is selected automatically')
+
     parser.add_argument('--scholar-results', default=10, type=int, choices=[1,2,3,4,5,6,7,8,9,10], help='Downloads the first x results in a scholar page(max=10)')
     
     parser.add_argument('--libgen-results', default=10, type=int, help='Downloads the first x result of a Libgen page(max=100)')
