@@ -153,7 +153,7 @@ def main():
         print("Error, provide the directory path in which to save the results")
         sys.exit()
 
-    if (args.libgen_results >= 100) or (args.libgen_results =< 0):
+    if (args.libgen_results >= 100) or (args.libgen_results <= 0):
         print("Error: value of --libgen-results must be between 0 to 100")
         sys.exit()
 
