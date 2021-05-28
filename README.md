@@ -3,6 +3,8 @@
 
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
+[![PyPI version](https://badge.fury.io/py/Libgenbot.svg)](https://badge.fury.io/py/Libgenbot)
+
 Libgenbot is a Bot written in Python to download PDFs from libgen.
 It is a fork of PyPaperBot, and is inspired by it
 Currently in alpha, please leave feedback and report issues
