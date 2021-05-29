@@ -117,35 +117,34 @@ def setLibgenUrl():
             print("\nNo working Libgen instance found!\nIf in your country Libgen is not available consider using a VPN or a proxy")
             NetInfo.Libgen_URL = "https://libgen.is/"
 
-def downloadlibgenPapers(title, link, authors, dwnl_dir, num_limit, libgen_results):
+def downloadlibgenPapers(papers, dwnl_dir, num_limit, libgen_results):
 
     num_downloaded = 0
     paper_number = 1
     paper_files = []
     for p in papers:
-        if p.canBeDownloaded():
-            print("Download {} of {} -> {}".format(paper_number, libgen_results, p.title))
-            paper_number += 1
+        print("Download {} of {} -> {}".format(paper_number, libgen_results, p.title))
+        paper_number += 1
 
-            pdf_dir = getSaveDir(dwnl_dir, p.getFileName())
-            while p.downloaded==False:
-                try:
+        pdf_dir = getSaveDir(dwnl_dir, p.getFileName())
+        while p.downloaded==False:
+            try:
 
-                    if url!="":
-                        r = requests.get(link, headers=NetInfo.HEADERS)
-                        content_type = r.headers.get('content-type')
+                if url!="":
+                    r = requests.get(p.link, headers=NetInfo.HEADERS)
+                    content_type = r.headers.get('content-type')
 
-                        if ('application/pdf' not in content_type) and ('application/pdb' not in content_type):
-                            time.sleep(random.randint(1,5))
+                    if ('application/pdf' not in content_type) and ('application/pdb' not in content_type):
+                        time.sleep(random.randint(1,5))
 
-                            pdf_link = getLibgenPDF(r.text)
-                            if(pdf_link != None):
-                                r = requests.get(link, headers=NetInfo.HEADERS)
-                                content_type = r.headers.get('content-type')
-                                dwn_source = 1
-                        if ('application/pdf' in content_type) or ('application/pdb' in content_type):
-                            paper_files.append(saveFile(pdf_dir,r.content,p,dwn_source))
+                        pdf_link = getLibgenPDF(r.text)
+                        if(pdf_link != None):
+                            r = requests.get(link, headers=NetInfo.HEADERS)
+                            content_type = r.headers.get('content-type')
+                            dwn_source = 1
+                    if ('application/pdf' in content_type) or ('application/pdb' in content_type):
+                        paper_files.append(saveFile(pdf_dir,r.content,p,dwn_source))
              
-                except Exception:
-                    pass
+            except Exception:
+                pass
 

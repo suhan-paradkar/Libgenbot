@@ -53,21 +53,8 @@ def scholar_start(scholar_query, scholar_results, scholar_pages, dwn_dir, proxy,
 def start(query, results, pages, genre, dwn_dir, proxy, num_limit=None, num_limit_type=None, filter_jurnal_file=None, restrict=None, DOIs=None, Libgen_URL=None):
 
     to_download = []
-    if DOIs==None:
         print("Query: {}".format(query))
         to_download = LibgenPapersInfo(query, pages, genre, restrict, results)
-    else:
-        print("Downloading papers from DOIs\n")
-        num = 1
-        i = 0
-        while i<len(DOIs):
-            DOI = DOIs[i]
-            print("Searching paper {} of {} with DOI {}".format(num,len(DOIs),DOI))
-            papersInfo = getPapersInfoFromDOIs(DOI, restrict)
-            to_download.append(papersInfo)
-
-            num += 1
-            i +=  1
 
         downloadlibgenPapers(to_download, dwn_dir, num_limit, libgen_results)
 
