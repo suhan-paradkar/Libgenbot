@@ -117,6 +117,20 @@ def widthfx(tag):
         class_ = tag.get("width", [])
         return "500" in width
 
+def linkxf(url):
+    k = requests.get(url, headers=Netinfo.HEADERS)
+    kt = html.text
+    soup = BeatutifulSoup(kt, "html.parser")
+    for element in soup.findAll("div", id="download"):
+        for ul in element.findAll("ul"):
+            for li in ul.findAll("li"):
+                for a in li.findAll("a"):
+                    if a.text == "IPFS.io":
+                        link = a.get("href")
+
+    if link != None:
+        return link
+
 def LibgenParser(html, genre):
     result = []
     if genre == 1:
@@ -140,7 +154,8 @@ def LibgenParser(html, genre):
                                     authors = a.text
                                 else:
                                     if a.text == "[1]":
-                                        link = a.get("href")
+                                        linkxf = a.get("href")
+                                        link = linkparse(linkxf)
                                         found = True
                                         result.append({
                                             'title' : title,
