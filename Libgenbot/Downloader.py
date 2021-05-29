@@ -147,3 +147,7 @@ def downloadPapers(papers, dwnl_dir, num_limit, libgen_results):
                                 dwn_source = 1
                         if ('application/pdf' in content_type) or ('application/pdb' in content_type):
                             paper_files.append(saveFile(pdf_dir,r.content,p,dwn_source))
+             
+                except Exception:
+                    pass
+
