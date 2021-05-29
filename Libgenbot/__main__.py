@@ -69,18 +69,6 @@ def start(query, results, pages, genre, dwn_dir, proxy, num_limit=None, num_limi
             num += 1
             i +=  1
 
-
-    if restrict!=0 and to_download:
-        if filter_jurnal_file!=None:
-           to_download = filterJurnals(to_download,filter_jurnal_file)
-
-        if num_limit_type!=None and num_limit_type==0:
-            to_download.sort(key=lambda x: int(x.sc_year) if x.sc_year!=None else 0, reverse=True)
-
-        if num_limit_type!=None and num_limit_type==1:
-            to_download.sort(key=lambda x: int(x.sc_cites) if x.sc_cites!=None else 0, reverse=True)
-
-
         downloadlibgenPapers(to_download, dwn_dir, num_limit, libgen_results)
 
 
