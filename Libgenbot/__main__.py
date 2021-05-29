@@ -5,6 +5,7 @@ import sys
 from .Paper import Paper
 from .PapersFilters import filterJurnals, filter_min_date, similarStrings
 from .Downloader import downloadPapers
+from .Downloader import downloadlibgenPapers
 from .Scholar import ScholarPapersInfo
 from .Crossref import getPapersInfoFromDOIs
 from .proxy import proxy
@@ -53,10 +54,10 @@ def scholar_start(scholar_query, scholar_results, scholar_pages, dwn_dir, proxy,
 def start(query, results, pages, genre, dwn_dir, proxy, num_limit=None, num_limit_type=None, filter_jurnal_file=None, restrict=None, DOIs=None, Libgen_URL=None):
 
     to_download = []
-        print("Query: {}".format(query))
-        to_download = LibgenPapersInfo(query, pages, genre, restrict, results)
+    print("Query: {}".format(query))
+    to_download = LibgenPapersInfo(query, pages, genre, restrict, results)
 
-        downloadlibgenPapers(to_download, dwn_dir, num_limit, libgen_results)
+    downloadlibgenPapers(to_download, dwn_dir, num_limit, results)
 
 
     Paper.generateReport(to_download,dwn_dir+"result.csv")
@@ -66,7 +67,7 @@ def start(query, results, pages, genre, dwn_dir, proxy, num_limit=None, num_limi
 def main():
     print("""Libgenbot is a simple bot written in python inspired by PyPaperBot""")
 
-    parser = argparse.ArgumentParser(description='Libgenbot is python tool to search and download any book using Libgen')
+    parser = argparse.ArgumentParser(description='Libgenbot is python tool to search and download any article using Libgen')
     
     parser.add_argument('--query', '-q', type=str, default=None, help='Query to make on Libgen')
     

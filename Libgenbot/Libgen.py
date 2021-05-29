@@ -53,4 +53,4 @@ def LibgenPapersInfo(lquery, libgen_pages, genre, restrict, libgen_results=10):
 
     to_download = libgen_requests(libgen_pages, url, restrict, genre, libgen_results)
 
-    return to_download
+    return [item for item in to_download]
