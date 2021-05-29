@@ -29,7 +29,7 @@ def libgen_requests(libgen_pages, url, restrict, genre, libgen_results=25):
         print("\nLibgen page {} : {} papers found".format(i,libgen_results))
 
         if(len(lpapers)>0):
-            to_download.append(url, dwn_dir, num_limit, libgen_results)
+            to_download.append(lpapers)
 
         else:
             print("Paper not found...")
@@ -53,4 +53,4 @@ def LibgenPapersInfo(lquery, libgen_pages, genre, restrict, libgen_results=10):
 
     to_download = libgen_requests(libgen_pages, url, restrict, genre, libgen_results)
 
-    return [item for sublist in to_download for item in sublist]
+    return [item for item in to_download ]

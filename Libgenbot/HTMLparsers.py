@@ -139,7 +139,7 @@ def widthfx(tag):
 
 def linkxf(url):
     k = requests.get(url, headers=Netinfo.HEADERS)
-    kt = html.text
+    kt = k.text
     soup = BeatutifulSoup(kt, "html.parser")
     for element in soup.findAll("div", id="download"):
         for ul in element.findAll("ul"):
