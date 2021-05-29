@@ -9,7 +9,8 @@ from .Scholar import ScholarPapersInfo
 from .Crossref import getPapersInfoFromDOIs
 from .proxy import proxy
 from .Libgen import LibgenPapersInfo
-def scholar_start(query, scholar_query, scholar_results, scholar_pages, dwn_dir, proxy, min_date=None, num_limit=None, num_limit_type=None, filter_jurnal_file=None, restrict=None, DOIs=None, SciHub_URL=None):
+
+def scholar_start(scholar_query, scholar_results, scholar_pages, dwn_dir, proxy, min_date=None, num_limit=None, num_limit_type=None, filter_jurnal_file=None, restrict=None, DOIs=None, SciHub_URL=None):
 
     to_download = []
     if DOIs==None:
@@ -235,11 +236,11 @@ def main():
         max_dwn = args.max_dwn_cites
         max_dwn_type = 1
 
-    if libgen_pages != None:
+    if args.query != None:
         start(args.query, args.libgen_results, args.libgen_pages, args.genre, dwn_dir, proxy, max_dwn, max_dwn_type , args.journal_filter, args.restrict, DOIs, args.libgen_mirror)
 
-    if scholar_pages != None:
-         scholar_start(args.query, args.scholar_results, args.scholar_pages, dwn_dir, proxy, args.min_year , max_dwn, max_dwn_type , args.journal_filter, args.restrict, DOIs, args.libgen_mirror)
+    if args.scholar_query != None:
+         scholar_start(args.scholar_query, args.scholar_results, args.scholar_pages, dwn_dir, proxy, args.min_year , max_dwn, max_dwn_type , args.journal_filter, args.restrict, DOIs, args.libgen_mirror)
 
 
 if __name__ == "__main__":

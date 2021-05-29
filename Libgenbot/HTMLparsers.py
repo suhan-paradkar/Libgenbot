@@ -107,21 +107,30 @@ def LibgenUrls(html):
 
     return result
 
+def bgcolorfx(tag):
+    if tag.name == "tr":
+        bgcolor = tag.get("bgcolor", [])
+        return "#C0C0C0" not in bgcolor
+
+def widthfx(tag):
+    if tag.name == "td":
+        class_ = tag.get("width", [])
+        return "500" in width
+
 def LibgenParser(html, genre):
     result = []
     if genre == 1:
-        soup = BeautifulSoup(html, "html5lib")
+        soup = BeautifulSoup(html, "html.parser")
         for element in soup.findAll("table", class_="c"):
             k = True
-            for tbody in element.findAll("tbody", bgcolor!="#C0C0C0"):
-                for tr in element.findAll("tr", width!=500):
-                    for a in tr.findAll("a"):
-                        if found == False:
-                            title = a.text
+            for tr in element.findAll(bgcolorfx):
+                for a in tr.findAll("a"):
+                    if found == False:
+                        title = a.text
                 link = None
                 authors = None
 
-                for td in element.findAll("td", width=!"500"):
+                for td in tr.findAll(widthfx):
                     found = False
                     for a in td.findAll("a"):
                         if found == False:
@@ -133,13 +142,11 @@ def LibgenParser(html, genre):
                                     if a.text == "[1]":
                                         link = a.get("href")
                                         found = True
-
-            if title!=None:
-                result.append({
-                    'title' : title,
-                    'link' : link,
-                    'authors' : authors})
-        return result
+                                        result.append({
+                                            'title' : title,
+                                            'link' : link,
+                                            'authors' : authors})
+                                        return result
 
     if genre == 2:
         soup = BeautifulSoup(html, "html.parser")
@@ -197,7 +204,9 @@ def LibgenParser(html, genre):
                             'title' : title,
                             'link' : link,
                             'authors' : authors})
+                        return result
 
+    return result
 
 def SciHubUrls(html):
     result = []

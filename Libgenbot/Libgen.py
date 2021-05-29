@@ -7,21 +7,21 @@ from .NetInfo import NetInfo
 
 def libgen_requests(libgen_pages, genre, url, restrict, libgen_results=25): 
     javascript_error = "Sorry, we can't verify that you're not a robot when JavaScript is turned off"
-    
+
     to_download = []
-    
+
     for i in libgen_pages:
         while True:
             url += "&page="+str(i)
             html = requests.get(url, headers=NetInfo.HEADERS)
             html = html.text
 
-            if javascript_error in html:    
+            if javascript_error in html:
                 is_continue = waithIPchange()
-                
+
                 if not is_continue:
                     return to_download
-            
+
             else:
                 break
 
