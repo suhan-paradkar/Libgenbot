@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from bs4 import BeautifulSoup
+from .NetInfo import NetInfo
 
 def schoolarParser(html):
     result = []
@@ -82,6 +83,25 @@ def getSchiHubPDF(html):
         result = "https:"+result
 
     return result
+
+def getLibgenPDF(html):
+    result = None
+    soup = BeautifulSoup(html, "html.parser")
+
+    iframe = soup.find(id='pdf')
+    plugin = soup.find(id='plugin')
+
+    if iframe!=None:
+        result = iframe.get("src")
+
+    if plugin!=None and result==None:
+        result = plugin.get("src")
+
+    if result!=None and result[0]!="h":
+        result = "https:"+result
+
+    return result
+
 
 def SciHubUrls(html):
     result = []
