@@ -43,7 +43,7 @@ def scholar_start(scholar_query, scholar_results, scholar_pages, dwn_dir, proxy,
         if num_limit_type!=None and num_limit_type==1:
             to_download.sort(key=lambda x: int(x.sc_cites) if x.sc_cites!=None else 0, reverse=True)
 
-        downloadlibgenPapers(to_download, dwn_dir, num_limit, SciHub_URL)
+        downloadPapers(to_download, dwn_dir, num_limit, SciHub_URL)
 
 
     Paper.generateReport(to_download,dwn_dir+"result.csv")
@@ -81,7 +81,7 @@ def start(query, results, pages, genre, dwn_dir, proxy, num_limit=None, num_limi
             to_download.sort(key=lambda x: int(x.sc_cites) if x.sc_cites!=None else 0, reverse=True)
 
 
-        downloadPapers(to_download, dwn_dir, num_limit, Libgen_URL)
+        downloadlibgenPapers(to_download, dwn_dir, num_limit, libgen_results)
 
 
     Paper.generateReport(to_download,dwn_dir+"result.csv")

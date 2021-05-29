@@ -29,14 +29,8 @@ def libgen_requests(libgen_pages, genre, url, restrict, libgen_results=25):
         print("\nLibgen page {} : {} papers found".format(i,libgen_results))
 
         if(len(lpapers)>0):
-            papersInfo = getlibgenPapersInfo(lpapers, url, restrict, libgen_results)
-            
-            info_valids = functools.reduce(lambda a,b : a+1 if b.DOI!=None else a, papersInfo, 0)
-            
-            print("Papers found on Crossref: {}/{}\n".format(info_valids,len(lpapers)))
+            to_download.append(url, dwn_dir, num_limit, libgen_results)
 
-            to_download.append(papersInfo)
-        
         else:
             print("Paper not found...")
 
