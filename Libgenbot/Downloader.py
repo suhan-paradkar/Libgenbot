@@ -117,7 +117,7 @@ def setLibgenUrl():
             print("\nNo working Libgen instance found!\nIf in your country Libgen is not available consider using a VPN or a proxy")
             NetInfo.Libgen_URL = "https://libgen.is/"
 
-def downloadPapers(papers, dwnl_dir, num_limit, libgen_results):
+def downloadlibgenPapers(papers, dwnl_dir, num_limit, libgen_results):
 
     num_downloaded = 0
     paper_number = 1

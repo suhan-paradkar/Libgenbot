@@ -29,7 +29,7 @@ def libgen_requests(libgen_pages, genre, url, restrict, libgen_results=25):
         print("\nLibgen page {} : {} papers found".format(i,libgen_results))
 
         if(len(lpapers)>0):
-            papersInfo = getlibgenapersInfo(lpapers, url, restrict, libgen_results)
+            papersInfo = getlibgenPapersInfo(lpapers, url, restrict, libgen_results)
             
             info_valids = functools.reduce(lambda a,b : a+1 if b.DOI!=None else a, papersInfo, 0)
             
