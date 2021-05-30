@@ -215,6 +215,7 @@ def LibgenParser(html, genre):
         for element in soup.findAll("table", class_="catalog"):
             for tbody in element.findAll("tbody"):
                 for tr in tbody.findAll("tr"):
+                    title = None
                     for td in tr.findAll("td"):
                         for ul in tr.findAll("ul", class_="catalog_authors"):
                             for li in ul.findAll("li"):
@@ -230,11 +231,13 @@ def LibgenParser(html, genre):
                                     if a.text == "[1]":
                                         linkx = a.get("href")
                                         link = linkparse(linkx)
-                        if link!=None:
-                            result.append({
-                                'title' : title,
-                                'link' : link,
-                                'authors' : authors})
+                                        if title!=None:
+                                            result.append({
+                                                'title' : title,
+                                                'link' : link,
+                                                'authors' : authors})
+    
+
     return result
 
 
