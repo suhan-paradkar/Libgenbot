@@ -132,8 +132,8 @@ def downloadlibgenPapers(papers, dwnl_dir, num_limit, libgen_results):
         while downloaded==False:
             try:
 
-                if url!="":
-                    r = requests.get(p.link, headers=NetInfo.HEADERS)
+                if p['link']!="":
+                    r = requests.get(p['link'], headers=NetInfo.HEADERS)
                     content_type = r.headers.get('content-type')
 
                     if ('application/pdf' not in content_type):
