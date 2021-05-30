@@ -145,7 +145,6 @@ def widthfox(tag):
 
 
 def linkparse(url):
-    linkp = []
     k = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'})
     kt = k.text
     soup = BeautifulSoup(kt, "html.parser")
@@ -155,103 +154,88 @@ def linkparse(url):
                 for a in li.findAll("a"):
                     if a.text == "IPFS.io":
                         link = a.get("href")
-                        linkp.append(link)
 
     if link != None:
-        return linkp
+        return link
 
 def LibgenParser(html, genre):
-    res = []
-    if genre == 1:
-        result = genre1parse(html)
-        res.append(result)
-    if genre == 2:
-        result = genre2parse(html)
-        res.append(result)
-    if genre == 3:
-        result = genre30arse(html)
-        res.append(result)
-    return res
-
-def genre1parse(html):
     result = []
-    soup = BeautifulSoup(html, "html.parser")
-    for element in soup.findAll("table", class_="c"):
-        for tr in element.findAll(bgcolorfx):
-            for td in tr.findAll(widthfx):
-                for a in tr.findAll("a"):
-                    titlex = a.get("href")
-                    if titlex.startswith("book/index"):
-                        title = a.text
-                    link = None
-                    authors = None
-
-            for td in tr.findAll(widthfox):
-                for a in td.findAll("a"):
-                    if a.get("title") == None:
-                        authors = a.text
-                    if a.get("title") == "Gen.lib.rus.ec":
-                        linkxf = a.get("href")
-                        link = linkparse(linkxf)
-                        result.append({
-                            'title' : title,
-                            'link' : link,
-                            'authors' : authors})
-    return result
-
-def genre2parse(html):
-    soup = BeautifulSoup(html, "html.parser")
-    for element in soup.findAll("table", class_="catalog"):
-        for tbody in element.findAll("tbody"):
-            for tr in tbody.findAll("tr"):
-                for td in tr.findAll("td"):
-                    for ul in td.findAll("ul", class_="record_mirrors"):
-                        for a in ul.findAll("a"):
-                            linkx = a.get("href")
-                            link = linkparse(linkx)
-                    for p in td.findAll("p"):
-                        for a in p.findAll("a"):
-                            possible = a.get("href")
-                            if possible.startswith("scimag/journals"):
-                                jurnal = a.text
-                            else:
-                                title = a.text
-
-                    if br in td.findAll("br"):
-                        authors = None
-                    else:
-                        authors = td.text
-
-                if authors!=None:
-                    result.append({
-                        'title' : title,
-                        'link' : link,
-                        'authors' : authors})
-    return result
-def genre30arse(html):
-    soup = BeautifulSoup(html, "html.parser")
-    for element in soup.findall("table", class_="catalog"):
-        for tbody in element.findAll("tbody"):
-            for tr in tbody.findAll("tr"):
-                for td in tr.findAll("td"):
-                    for ul in tr.findAll("ul", class_="catalog_authors"):
-                        for li in ul.findall("li"):
-                            for a in li.findAll("a"):
-                                authors = a.text
-                    for a in td.findAll("a"):
-                        fic = a.get("href")
-                        if fic.startswith("fiction/"):
+    if genre == 1:
+        soup = BeautifulSoup(html, "html.parser")
+        for element in soup.findAll("table", class_="c"):
+            for tr in element.findAll(bgcolorfx):
+                for td in tr.findAll(widthfx):
+                    for a in tr.findAll("a"):
+                        titlex = a.get("href")
+                        if titlex.startswith("book/index"):
                             title = a.text
-                    for ul in tr.findAll("ul", class_="record_mirrors_compact"):
-                        for li in ul.findAll("li"):
-                            for a in li.findAll("a"):
-                                if a.text == "[1]":
-                                    link = a.get("href")
-                    if link!=None:
+                        link = None
+                        authors = None
+
+                for td in tr.findAll(widthfox):
+                    for a in td.findAll("a"):
+                        if a.get("title") == None:
+                            authors = a.text
+                        if a.get("title") == "Gen.lib.rus.ec":
+                            linkxf = a.get("href")
+                            link = linkparse(linkxf)
+                            result.append({
+                                'title' : title,
+                                'link' : link,
+                                'authors' : authors})
+
+    if genre == 2:
+        soup = BeautifulSoup(html, "html.parser")
+        for element in soup.findAll("table", class_="catalog"):
+            for tbody in element.findAll("tbody"):
+                for tr in tbody.findAll("tr"):
+                    for td in tr.findAll("td"):
+                        for ul in td.findAll("ul", class_="record_mirrors"):
+                            for a in ul.findAll("a"):
+                                linkx = a.get("href")
+                                link = linkparse(linkx)
+                        for p in td.findAll("p"):
+                            for a in p.findAll("a"):
+                                possible = a.get("href")
+                                if possible.startswith("scimag/journals"):
+                                    jurnal = a.text
+                                else:
+                                    title = a.text
+
+                        if br in td.findAll("br"):
+                            authors = None
+                        else:
+                            authors = td.text
+
+                    if authors!=None:
                         result.append({
                             'title' : title,
                             'link' : link,
                             'authors' : authors})
+    if genre == 3:
+        soup = BeautifulSoup(html, "html.parser")
+        for element in soup.findall("table", class_="catalog"):
+            for tbody in element.findAll("tbody"):
+                for tr in tbody.findAll("tr"):
+                    for td in tr.findAll("td"):
+                        for ul in tr.findAll("ul", class_="catalog_authors"):
+                            for li in ul.findall("li"):
+                                for a in li.findAll("a"):
+                                    authors = a.text
+                        for a in td.findAll("a"):
+                            fic = a.get("href")
+                            if fic.startswith("fiction/"):
+                                title = a.text
+                        for ul in tr.findAll("ul", class_="record_mirrors_compact"):
+                            for li in ul.findAll("li"):
+                                for a in li.findAll("a"):
+                                    if a.text == "[1]":
+                                        link = a.get("href")
+                        if link!=None:
+                            result.append({
+                                'title' : title,
+                                'link' : link,
+                                'authors' : authors})
     return result
 
 

@@ -5,7 +5,6 @@ from .Crossref import getPapersInfo
 from .NetInfo import NetInfo
 
 def libgen_requests(libgen_pages, url, restrict, genre, libgen_results=25):
-
     to_download = []
 
     for i in libgen_pages:
@@ -19,11 +18,12 @@ def libgen_requests(libgen_pages, url, restrict, genre, libgen_results=25):
             to_download.append(lpapers)
         else:
             print("Paper not found...")
+            sys.exit()
 
     return to_download
 
 def LibgenPapersInfo(lquery, libgen_pages, genre, restrict, libgen_results=10):
-
+    to_download = []
     libgen_results_arg = 25
 
     if libgen_results > 25:
