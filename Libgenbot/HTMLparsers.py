@@ -192,8 +192,8 @@ def LibgenParser(html, genre):
                     for td in tr.findAll("td"):
                         for ul in td.findAll("ul", class_="record_mirrors"):
                             for a in ul.findAll("a"):
-                                linkx = a.get("href")
-                                link = linkparse(linkx)
+                                if a.text =="Sci-Hub":
+                                    link = a.get("href")
                         for p in td.findAll("p"):
                             for a in p.findAll("a"):
                                 possible = a.get("href")
@@ -207,7 +207,7 @@ def LibgenParser(html, genre):
                         else:
                             authors = td.text
 
-                    if authors!=None:
+                    if link!=None:
                         result.append({
                             'title' : title,
                             'link' : link,

@@ -25,15 +25,19 @@ def libgen_requests(libgen_pages, url, restrict, genre, libgen_results=25):
 
 def LibgenPapersInfo(lquery, libgen_pages, genre, restrict, libgen_results=10):
     to_download = []
-    libgen_results_arg = 25
+    if genre == 1:
+        libgen_results_arg = 25
 
-    if libgen_results > 25:
-            libgen_results_arg += 25
-            if libgen_results > 50:
-                libgen_results_arg += 50
+        if libgen_results > 25:
+                libgen_results_arg += 25
+                if libgen_results > 50:
+                    libgen_results_arg += 50
 
-    url = "https://libgen.is/search.php?req="+lquery+"&lg_topic=libgen&open=0&view=simple&res="+str(libgen_results_arg)+"&phrase=1&column=def"
+        url = "https://libgen.is/search.php?req="+lquery+"&lg_topic=libgen&open=0&view=simple&res="+str(libgen_results_arg)+"&phrase=1&column=def"
 
-    to_download = libgen_requests(libgen_pages, url, restrict, genre, libgen_results)
+        to_download = libgen_requests(libgen_pages, url, restrict, genre, libgen_results)
+
+    if genre == 2:
+        url = "https://libgen.is/scimag/?q="=lquery
 
     return [item for sublist in to_download for item in sublist]
