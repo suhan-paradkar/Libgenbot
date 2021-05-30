@@ -2,6 +2,7 @@
 
 from bs4 import BeautifulSoup
 from .NetInfo import NetInfo
+import requests
 
 def schoolarParser(html):
     result = []
@@ -129,49 +130,63 @@ def LibgenUrls(html):
 
 def bgcolorfx(tag):
     if tag.name == "tr":
-        bgcolor = tag.get("bgcolor", [])
-        return "#C0C0C0" not in bgcolor
+        mbgcolor = tag.get("bgcolor", [])
+        return "#C0C0C0" not in mbgcolor
 
 def widthfx(tag):
     if tag.name == "td":
-        class_ = tag.get("width", [])
+        width = tag.get("width", [])
         return "500" in width
 
+def widthfox(tag):
+    if tag.name == "td":
+        width = tag.get("width", [])
+        return "500" not in width
+
+
 def linkparse(url):
-    k = requests.get(url, headers=Netinfo.HEADERS)
+    linkp = []
+    k = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'})
     kt = k.text
-    soup = BeatutifulSoup(kt, "html.parser")
+    soup = BeautifulSoup(kt, "html.parser")
     for element in soup.findAll("div", id="download"):
         for ul in element.findAll("ul"):
             for li in ul.findAll("li"):
                 for a in li.findAll("a"):
                     if a.text == "IPFS.io":
                         link = a.get("href")
+                        linkp.append(link)
 
     if link != None:
-        return link
+        return linkp
 
 def LibgenParser(html, genre):
-    result = []
+    res = []
     if genre == 1:
         result = genre1parse(html)
+        res.append(result)
     if genre == 2:
         result = genre2parse(html)
+        res.append(result)
     if genre == 3:
         result = genre30arse(html)
-    return result
+        res.append(result)
+    return res
 
 def genre1parse(html):
     result = []
     soup = BeautifulSoup(html, "html.parser")
     for element in soup.findAll("table", class_="c"):
         for tr in element.findAll(bgcolorfx):
-            for a in tr.findAll("a"):
-                title = a.text
-                link = None
-                authors = None
+            for td in tr.findAll(widthfx):
+                for a in tr.findAll("a"):
+                    titlex = a.get("href")
+                    if titlex.startswith("book/index"):
+                        title = a.text
+                    link = None
+                    authors = None
 
-            for td in tr.findAll("td"):
+            for td in tr.findAll(widthfox):
                 for a in td.findAll("a"):
                     if a.get("title") == None:
                         authors = a.text

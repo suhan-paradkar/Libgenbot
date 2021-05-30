@@ -1,36 +1,22 @@
 import time
 import requests
-import functools
 from .HTMLparsers import LibgenParser
 from .Crossref import getPapersInfo
 from .NetInfo import NetInfo
 
-def libgen_requests(libgen_pages, url, restrict, genre, libgen_results=25): 
-    javascript_error = "Sorry, we can't verify that you're not a robot when JavaScript is turned off"
+def libgen_requests(libgen_pages, url, restrict, genre, libgen_results=25):
 
     to_download = []
 
     for i in libgen_pages:
-        while True:
-            url += "&page="+str(i)
-            html = requests.get(url, headers=NetInfo.HEADERS)
-            html = html.text
-
-            if javascript_error in html:
-                is_continue = waithIPchange()
-
-                if not is_continue:
-                    return to_download
-
-            else:
-                break
-
-        lpapers = LibgenParser(html, genre)
+        url += "&page="+str(i)
+        html = requests.get(url, headers=NetInfo.HEADERS)
+        htmlt = html.text
+        lpapers = LibgenParser(htmlt, genre)
         print("\nLibgen page {} : {} papers found".format(i,libgen_results))
 
         if(len(lpapers)>0):
             to_download.append(lpapers)
-
         else:
             print("Paper not found...")
 
@@ -45,12 +31,8 @@ def LibgenPapersInfo(lquery, libgen_pages, genre, restrict, libgen_results=10):
             if libgen_results > 50:
                 libgen_results_arg += 50
 
-    url = r"https://libgen.is/search.php?req="+lquery+"lg_topic=libgen&open=0&view=simple&res="+str(libgen_results_arg)+"&phrase=1&column=def"
-    
-
-    if len(lquery)>7 and (lquery[0:7]=="http://" or lquery[0:8]=="https://"):
-         url = lquery
+    url = "https://libgen.is/search.php?req="+lquery+"&lg_topic=libgen&open=0&view=simple&res="+str(libgen_results_arg)+"&phrase=1&column=def"
 
     to_download = libgen_requests(libgen_pages, url, restrict, genre, libgen_results)
 
-    return [item for item in to_download]
+    return [item for sublist in to_download for item in sublist]
