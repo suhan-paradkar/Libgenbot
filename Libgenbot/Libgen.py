@@ -35,9 +35,11 @@ def LibgenPapersInfo(lquery, libgen_pages, genre, restrict, libgen_results=10):
 
         url = "https://libgen.is/search.php?req="+lquery+"&lg_topic=libgen&open=0&view=simple&res="+str(libgen_results_arg)+"&phrase=1&column=def"
 
-        to_download = libgen_requests(libgen_pages, url, restrict, genre, libgen_results)
-
     if genre == 2:
-        url = "https://libgen.is/scimag/?q="=lquery
+        url = "https://libgen.is/scimag/?q="+lquery
+
+
+    to_download = libgen_requests(libgen_pages, url, restrict, genre, libgen_results)
+
 
     return [item for sublist in to_download for item in sublist]
