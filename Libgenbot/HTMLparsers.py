@@ -212,12 +212,12 @@ def LibgenParser(html, genre):
                             'authors' : authors})
     if genre == 3:
         soup = BeautifulSoup(html, "html.parser")
-        for element in soup.findall("table", class_="catalog"):
+        for element in soup.findAll("table", class_="catalog"):
             for tbody in element.findAll("tbody"):
                 for tr in tbody.findAll("tr"):
                     for td in tr.findAll("td"):
                         for ul in tr.findAll("ul", class_="catalog_authors"):
-                            for li in ul.findall("li"):
+                            for li in ul.findAll("li"):
                                 for a in li.findAll("a"):
                                     authors = a.text
                         for a in td.findAll("a"):
