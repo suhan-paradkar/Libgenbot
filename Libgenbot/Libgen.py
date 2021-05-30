@@ -38,6 +38,8 @@ def LibgenPapersInfo(lquery, libgen_pages, genre, restrict, libgen_results=10):
     if genre == 2:
         url = "https://libgen.is/scimag/?q="+lquery
 
+    if genre == 3:
+        url = "https://libgen.is/fiction/?q="+lquery
 
     to_download = libgen_requests(libgen_pages, url, restrict, genre, libgen_results)
 

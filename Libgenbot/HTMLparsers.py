@@ -196,7 +196,7 @@ def LibgenParser(html, genre):
                         for p in td.findAll("p"):
                             for a in p.findAll("a"):
                                 possible = a.get("href")
-                                if possible.startswith("scimag/journals"):
+                                if possible.startswith("/scimag/journals"):
                                     jurnal = a.text
                                 else:
                                     title = a.text
@@ -228,7 +228,8 @@ def LibgenParser(html, genre):
                             for li in ul.findAll("li"):
                                 for a in li.findAll("a"):
                                     if a.text == "[1]":
-                                        link = a.get("href")
+                                        linkx = a.get("href")
+                                        link = linkparse(linkx)
                         if link!=None:
                             result.append({
                                 'title' : title,
