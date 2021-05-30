@@ -3,6 +3,7 @@ import requests
 from .HTMLparsers import LibgenParser
 from .Crossref import getPapersInfo
 from .NetInfo import NetInfo
+import sys
 
 def libgen_requests(libgen_pages, url, restrict, genre, libgen_results=25):
     to_download = []
