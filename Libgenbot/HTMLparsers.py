@@ -143,7 +143,6 @@ def widthfox(tag):
         width = tag.get("width", [])
         return "500" not in width
 
-
 def linkparse(url):
     k = requests.get(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'})
     kt = k.text
@@ -202,10 +201,9 @@ def LibgenParser(html, genre):
                                 else:
                                     title = a.text
 
-                        if br in td.findAll("br"):
-                            authors = None
-                        else:
+                        if not td.find("br"):
                             authors = td.text
+                
 
                     if link!=None:
                         result.append({
