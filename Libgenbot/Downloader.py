@@ -120,7 +120,7 @@ def setLibgenUrl():
 def getfileName(self):
     try:
         return re.sub('[^\w\-_\. ]', '_', self['title']+".pdf"
-    except:
+    except Exception:
         return "none.pdf"
 
 def downloadlibgenPapers(papers, dwnl_dir, num_limit, libgen_results):
