@@ -128,7 +128,8 @@ def downloadlibgenPapers(papers, dwnl_dir, num_limit, libgen_results):
         print("Download {} of {} -> {}".format(paper_number, libgen_results, p['title']))
         paper_number += 1
         pdf_dir = getSaveDir(dwnl_dir, re.sub('[^\w\-_\. ]', '_', p['title']+".pdf"))
-        while p.downloaded==False:
+        downloaded = False
+        while downloaded = False:
             try:
 
                 if url!="":
@@ -145,6 +146,7 @@ def downloadlibgenPapers(papers, dwnl_dir, num_limit, libgen_results):
                             dwn_source = 1
                     if ('application/pdf' in content_type):
                         paper_files.append(saveFile(pdf_dir,r.content,p,dwn_source))
+                        downloaded = True
              
             except Exception:
                 pass
