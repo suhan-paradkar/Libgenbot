@@ -125,7 +125,7 @@ def downloadlibgenPapers(papers, dwnl_dir, num_limit, libgen_results):
     for p in papers:
         print("Download {} of {} -> {}".format(paper_number, libgen_results, p['title']))
         paper_number += 1
-        pdf_dir = getSaveDir(dwnl_dir, re.sub('[^\w\-_\. ]', '_', p['title']+".pdf")
+        pdf_dir = getSaveDir(dwnl_dir, re.sub('[^\w\-_\. ]', '_', p['title']+".pdf"))
         while p.downloaded==False:
             try:
 
