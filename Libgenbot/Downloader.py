@@ -5,6 +5,8 @@ from .HTMLparsers import getSchiHubPDF, SciHubUrls
 import random
 from .NetInfo import NetInfo
 from .HTMLparsers import getLibgenPDF
+import re
+
 
 def setSciHubUrl():
     r = requests.get(NetInfo.SciHub_URLs_repo, headers=NetInfo.HEADERS)
