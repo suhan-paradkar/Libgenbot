@@ -1,0 +1,3 @@
+[console_scripts]
+Libgenbot = Libgenbot.__main__:main
+

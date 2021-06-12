@@ -124,6 +124,7 @@ def downloadlibgenPapers(papers, dwnl_dir, num_limit, libgen_results):
     num_downloaded = 0
     paper_number = 1
     paper_files = []
+    print(papers)
     for p in papers:
         print("Download {} of {} -> {}".format(paper_number, libgen_results, p['title']))
         paper_number += 1
@@ -147,7 +148,7 @@ def downloadlibgenPapers(papers, dwnl_dir, num_limit, libgen_results):
                     if ('application/pdf' in content_type):
                         paper_files.append(saveFile(pdf_dir,r.content,p,dwn_source))
                         downloaded = True
-             
+
             except Exception:
                 pass
 
