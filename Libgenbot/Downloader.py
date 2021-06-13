@@ -4,7 +4,7 @@ import time
 from .HTMLparsers import getSchiHubPDF, SciHubUrls
 import random
 from .NetInfo import NetInfo
-from .HTMLparsers import getLibgenPDF
+from .HTMLparsers import getLibgenPDF, LibgenUrls
 import re
 
 
@@ -142,7 +142,7 @@ def downloadlibgenPapers(papers, dwnl_dir, num_limit, libgen_results):
 
                         pdf_link = getLibgenPDF(r.text)
                         if(pdf_link != None):
-                            r = requests.get(link, headers=NetInfo.HEADERS)
+                            r = requests.get(p['link'], headers=NetInfo.HEADERS)
                             content_type = r.headers.get('content-type')
                             dwn_source = 1
                     if ('application/pdf' in content_type):

@@ -18,7 +18,7 @@ class lPaper:
         self.bibtex = None
 
         self.downloaded = False
-        self.downloadedFrom = Libgen
+        self.downloadedFrom = "Libgen"
 
 
 
