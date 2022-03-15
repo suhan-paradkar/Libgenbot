@@ -215,7 +215,7 @@ def main():
     if args.query != None:
         start(args.query, args.libgen_results, args.libgen_pages, args.genre, dwn_dir, proxy, max_dwn, max_dwn_type , args.journal_filter, args.restrict, DOIs, args.libgen_mirror)
 
-    if args.scholar_query != None:
+    if (args.scholar_query != None) or (args.doi != None):
          scholar_start(args.scholar_query, args.scholar_results, args.scholar_pages, dwn_dir, proxy, args.min_year , max_dwn, max_dwn_type , args.journal_filter, args.restrict, DOIs, args.libgen_mirror)
 
 
