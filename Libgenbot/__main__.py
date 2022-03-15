@@ -120,7 +120,7 @@ def main():
 
     proxy(pchain)
 
-    if args.query!=None and args.genre==None:
+    if (args.query!=None and args.genre==None):
         print("Error, no genre selected")
         sys.exit()
 
@@ -136,7 +136,7 @@ def main():
         print("Error: value of --libgen-results must be between 0 to 100")
         sys.exit()
 
-    if args.scholar_results!=10 and args.scholar_pages!=1:
+    if (args.scholar_results!=10 and args.scholar_pages!=1):
         print("Scholar results best applied along with --scholar-pages=1")
 
     dwn_dir = args.dwn_dir.replace('\\', '/')

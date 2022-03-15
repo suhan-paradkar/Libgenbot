@@ -69,6 +69,7 @@ python setup.py install
 | Arguments          | Description                                                                              | Type   |
 | ------------------ | ---------------------------------------------------------------------------------------- | ------ |
 | `--query`          | Query to make on Libgen page                                                             | string |
+| `--genre`          | select genre: one of 'libgen(Sci-Tech)[1]''Scientific articles[2]' 'Fiction[3]' . Is a must when using libgen                      | Int |
 | `--scholar-query`  | Query to be made on the Google Scholar page                                              | string |
 | `--doi`            | DOI of the paper to download (this option uses only SciHub to download)                  | string |
 | `--doi-file`       | File .txt containing the list of paper's DOIs to download                                | string |
@@ -95,7 +96,8 @@ You can use only one of the arguments in the following groups
 
 One of the arguments `--doi`, `--query`, `--scholar-query` , and `--file` is mandatory
 The arguments `--scholar-pages` is mandatory when using `--scholar-query`
-The argument `--dwn-dir` is mandatory
+The argument `--dwn-dir` is mandatory.
+The argument `--genre` is mandatory when using `--query`
 
 The argument `--journal-filter`  require the path of a CSV containing a list of journal name paired with a boolean which indicates whether or not to consider that journal (0: don't consider /1: consider)
 
@@ -106,5 +108,5 @@ The argument `--proxy` must be used at the end of the command. The protocol used
 #### Usage of Proxy
 
 ```
-Libgenbot --query=rheumatoid+arthritis --libgen-pages=1 --libgen-results=20 --dwn-dir=documents/ --proxy http://1.1.1.1:8080 http://8.0.8.0:8024
+Libgenbot --query=rheumatoid+arthritis --libgen-pages=1 --libgen-results=20 --genre=1 --dwn-dir=documents/ --proxy http://1.1.1.1:8080 http://8.0.8.0:8024
 ```
