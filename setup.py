@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
   name = 'Libgenbot',
   packages = setuptools.find_packages(),
-  version = '1.1.3',
+  version = '1.1.4',
   license='GPL-3.0',
   description = 'Libgenbot is a Python tool for downloading articles from Libgen, inspired by PyPaperBot.',
   long_description=long_description,
@@ -27,7 +27,7 @@ setuptools.setup(
         'future>=0.18.2',
         'HTMLParser>=0.0.2',
         'idna>=2.10,<4',
-        'isort>=5.4.2',
+        'isort>=4.3.20',
         'lazy-object-proxy>=1.4.3',
         'mccabe>=0.6.1',
         'numpy',
