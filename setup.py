@@ -17,7 +17,7 @@ setuptools.setup(
   download_url = 'https://github.com/suhan-paradkar/Libgenot/archive/v1.0.0-alpha.tar.gz',
   keywords = ['download-papers','google-scholar', 'libgen', 'scihub', 'scholar', 'crossref', 'papers'],
   install_requires=[
-        'astroid>=2.4.2,<3.1',
+        'astroid>=2.4.2,<3.2',
         'beautifulsoup4>=4.9.1',
         'bibtexparser>=1.2.0',
         'certifi>=2020.6.20',
